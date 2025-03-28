@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSP Header Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>CSP Header Generator</h1>
+        
+        <div class="csp-preview" id="cspPreview"></div>
+        <div class="button-group">
+            <button onclick="copyCSP()" class="copy-btn">Copy CSP Header</button>
+            <button onclick="showServerConfig('apache')" class="server-config-btn">Apache</button>
+            <button onclick="showServerConfig('nginx')" class="server-config-btn">Nginx</button>
+            <button onclick="showServerConfig('php')" class="server-config-btn">PHP</button>
+        </div>
+
+        <!-- Server Config Modal -->
+        <div id="serverConfigModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="document.getElementById('serverConfigModal').style.display='none'">&times;</span>
+                <h2 id="serverConfigTitle"></h2>
+                <pre id="serverConfigCode"></pre>
+                <button onclick="copyServerConfig()" class="copy-btn">Copy Config</button>
+            </div>
+        </div>
+
+        <div class="directive-section">
+            <h2>Sources</h2>
+            <div class="directive-grid">
+                <div class="directive" data-directive="default-src">
+                    <h3>Default Source <button class="details-btn">Details</button></h3>
+                    <div class="source-controls"></div>
+                </div>
+                <div class="directive" data-directive="script-src">
+                    <h3>Script Source <button class="details-btn">Details</button></h3>
+                    <div class="source-controls"></div>
+                </div>
+                <div class="directive" data-directive="style-src">
+                    <h3>Style Source <button class="details-btn">Details</button></h3>
+                    <div class="source-controls"></div>
+                </div>
+                <div class="directive" data-directive="img-src">
+                    <h3>Image Source <button class="details-btn">Details</button></h3>
+                    <div class="source-controls"></div>
+                </div>
+                <div class="directive" data-directive="font-src">
+                    <h3>Font Source <button class="details-btn">Details</button></h3>
+                    <div class="source-controls"></div>
+                </div>
+                <div class="directive" data-directive="connect-src">
+                    <h3>Connect Source <button class="details-btn">Details</button></h3>
+                    <div class="source-controls"></div>
+                </div>
+                <div class="directive" data-directive="media-src">
+                    <h3>Media Source <button class="details-btn">Details</button></h3>
+                    <div class="source-controls"></div>
+                </div>
+                <div class="directive" data-directive="object-src">
+                    <h3>Object Source <button class="details-btn">Details</button></h3>
+                    <div class="source-controls"></div>
+                </div>
+                <div class="directive" data-directive="prefetch-src">
+                    <h3>Prefetch Source <button class="details-btn">Details</button></h3>
+                    <div class="source-controls"></div>
+                </div>
+                <div class="directive" data-directive="child-src">
+                    <h3>Child Source <button class="details-btn">Details</button></h3>
+                    <div class="source-controls"></div>
+                </div>
+                <div class="directive" data-directive="frame-src">
+                    <h3>Frame Source <button class="details-btn">Details</button></h3>
+                    <div class="source-controls"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="directive-section">
+            <h2>Security</h2>
+            <div class="directive-grid">
+                <div class="directive" data-directive="frame-ancestors">
+                    <h3>Frame Ancestors <button class="details-btn">Details</button></h3>
+                    <div class="source-controls"></div>
+                </div>
+                <div class="directive" data-directive="form-action">
+                    <h3>Form Action <button class="details-btn">Details</button></h3>
+                    <div class="source-controls"></div>
+                </div>
+                <div class="directive" data-directive="upgrade-insecure-requests">
+                    <h3>Upgrade Insecure Requests <button class="details-btn">Details</button></h3>
+                    <div class="toggle-container">
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="directive" data-directive="block-all-mixed-content">
+                    <h3>Block All Mixed Content <button class="details-btn">Details</button></h3>
+                    <div class="toggle-container">
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="directive-section">
+            <h2>Reporting</h2>
+            <div class="directive-grid">
+                <div class="directive" data-directive="report-only">
+                    <h3>Report Only Mode <button class="details-btn">Details</button></h3>
+                    <div class="toggle-container">
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="directive" data-directive="report-uri">
+                    <h3>Report URI <button class="details-btn">Details</button></h3>
+                    <div class="source-controls"></div>
+                </div>
+                <div class="directive" data-directive="report-to">
+                    <h3>Report To <button class="details-btn">Details</button></h3>
+                    <div class="source-controls"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="directive-section">
+            <h2>Other Directives</h2>
+            <div class="directive-grid">
+                <div class="directive" data-directive="disown-opener">
+                    <h3>Disown Opener <button class="details-btn">Details</button></h3>
+                    <div class="toggle-container">
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="directive" data-directive="sandbox">
+                    <h3>Sandbox <button class="details-btn">Details</button></h3>
+                    <div class="sandbox-options">
+                        <div class="sandbox-option">
+                            <label class="switch">
+                                <input type="checkbox" data-sandbox="allow-forms">
+                                <span class="slider"></span>
+                            </label>
+                            <span>Allow Forms</span>
+                        </div>
+                        <div class="sandbox-option">
+                            <label class="switch">
+                                <input type="checkbox" data-sandbox="allow-scripts">
+                                <span class="slider"></span>
+                            </label>
+                            <span>Allow Scripts</span>
+                        </div>
+                        <div class="sandbox-option">
+                            <label class="switch">
+                                <input type="checkbox" data-sandbox="allow-popups">
+                                <span class="slider"></span>
+                            </label>
+                            <span>Allow Popups</span>
+                        </div>
+                        <div class="sandbox-option">
+                            <label class="switch">
+                                <input type="checkbox" data-sandbox="allow-same-origin">
+                                <span class="slider"></span>
+                            </label>
+                            <span>Allow Same Origin</span>
+                        </div>
+                        <div class="sandbox-option">
+                            <label class="switch">
+                                <input type="checkbox" data-sandbox="allow-top-navigation">
+                                <span class="slider"></span>
+                            </label>
+                            <span>Allow Top Navigation</span>
+                        </div>
+                        <div class="sandbox-option">
+                            <label class="switch">
+                                <input type="checkbox" data-sandbox="allow-modals">
+                                <span class="slider"></span>
+                            </label>
+                            <span>Allow Modals</span>
+                        </div>
+                        <div class="sandbox-option">
+                            <label class="switch">
+                                <input type="checkbox" data-sandbox="allow-orientation-lock">
+                                <span class="slider"></span>
+                            </label>
+                            <span>Allow Orientation Lock</span>
+                        </div>
+                        <div class="sandbox-option">
+                            <label class="switch">
+                                <input type="checkbox" data-sandbox="allow-pointer-lock">
+                                <span class="slider"></span>
+                            </label>
+                            <span>Allow Pointer Lock</span>
+                        </div>
+                        <div class="sandbox-option">
+                            <label class="switch">
+                                <input type="checkbox" data-sandbox="allow-presentation">
+                                <span class="slider"></span>
+                            </label>
+                            <span>Allow Presentation</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="directive" data-directive="base-uri">
+                    <h3>Base URI <button class="details-btn">Details</button></h3>
+                    <div class="source-controls"></div>
+                </div>
+                <div class="directive" data-directive="manifest-src">
+                    <h3>Manifest Source <button class="details-btn">Details</button></h3>
+                    <div class="source-controls"></div>
+                </div>
+                <div class="directive" data-directive="worker-src">
+                    <h3>Worker Source <button class="details-btn">Details</button></h3>
+                    <div class="source-controls"></div>
+                </div>
+                <div class="directive" data-directive="plugin-types">
+                    <h3>Plugin Types <button class="details-btn">Details</button></h3>
+                    <div class="source-controls"></div>
+                </div>
+                <div class="directive" data-directive="require-sri-for">
+                    <h3>Require SRI For <button class="details-btn">Details</button></h3>
+                    <div class="source-controls"></div>
+                </div>
+                <div class="directive" data-directive="trusted-types">
+                    <h3>Trusted Types <button class="details-btn">Details</button></h3>
+                    <div class="source-controls"></div>
+                </div>
+                <div class="directive" data-directive="navigate-to">
+                    <h3>Navigate To <button class="details-btn">Details</button></h3>
+                    <div class="source-controls"></div>
+                </div>
+                <div class="directive" data-directive="webrtc">
+                    <h3>WebRTC <button class="details-btn">Details</button></h3>
+                    <div class="toggle-container">
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="directiveModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="https://github.com/NanoClass/" target="_blank" class="social-link">
+                    <img src="https://www.svgrepo.com/show/512317/github-142.svg" class="social-icon" alt="GitHub">
+                </a>
+                <a href="https://www.linkedin.com/in/irvinedk/" target="_blank" class="social-link">
+                    <img src="https://www.svgrepo.com/show/473701/linkedin.svg" class="social-icon" alt="LinkedIn">
+                </a>
+            </div>
+            <div class="copyright">
+                &copy; 2025 CSP Header Generator. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,365 @@
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #3498db;
+    --background-color: #f5f6fa;
+    --success-color: #27ae60;
+    --danger-color: #e74c3c;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui;
+    margin: 0;
+    padding: 20px;
+    background-color: var(--background-color);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h1 {
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h2 {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--secondary-color);
+    padding-bottom: 10px;
+    margin: 30px 0 20px;
+}
+
+.directive-section {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.directive-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+}
+
+.directive {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 6px;
+    background: #fff;
+}
+
+.directive h3 {
+    margin: 0 0 15px;
+    font-size: 1.1em;
+    color: var(--primary-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.source-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.source-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.source-row input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+.button-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.copy-btn {
+    grid-column: 1 / -1;
+}
+
+.server-config-btn {
+    width: 100%;
+    min-width: 0; /* Allow buttons to shrink evenly */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.copy-btn {
+    display: block;
+    margin: 0;
+    padding: 12px 25px;
+    font-size: 1.1em;
+}
+
+.server-config-btn {
+    background-color: var(--primary-color);
+    padding: 12px 25px;
+    font-size: 1.1em;
+    margin: 0;
+}
+
+.server-config-btn:hover {
+    background-color: #1a252f;
+}
+
+#serverConfigCode {
+    background: #f5f5f5;
+    padding: 15px;
+    border-radius: 4px;
+    font-family: monospace;
+    white-space: pre-wrap;
+    margin: 15px 0;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 25px;
+    width: 90%;
+    max-width: 800px;
+    max-height: 80vh;
+    border-radius: 8px;
+    position: relative;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        margin: 2% auto;
+        padding: 15px;
+    }
+}
+
+.close {
+    color: #aaa;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: var(--primary-color);
+}
+
+#modalBody {
+    margin-top: 20px;
+    line-height: 1.6;
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 10px;
+    word-wrap: break-word;
+}
+
+#modalBody ul {
+    padding-left: 20px;
+    margin: 10px 0;
+}
+
+#modalBody li {
+    margin-bottom: 8px;
+    word-break: break-word;
+}
+
+#modalBody code {
+    background: #f5f5f5;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-family: monospace;
+    font-size: 0.9em;
+}
+
+#modalBody a {
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+#modalBody a:hover {
+    text-decoration: underline;
+}
+
+#modalBody ul {
+    padding-left: 20px;
+    margin: 10px 0;
+}
+
+#modalBody li {
+    margin-bottom: 8px;
+}
+
+.details-btn {
+    background-color: var(--primary-color);
+    padding: 4px 8px;
+    font-size: 0.9em;
+    margin-left: 10px;
+}
+
+.csp-preview {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 6px;
+    margin: 20px 0;
+    font-family: monospace;
+    white-space: pre-wrap;
+    border: 1px solid #ddd;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.toggle-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--success-color);
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.add-source {
+    background-color: var(--success-color);
+    margin-top: 10px;
+}
+
+.remove-source {
+    background-color: var(--danger-color);
+    padding: 5px 8px;
+}
+
+/* Footer Styles */
+.site-footer {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 30px 0;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.social-links {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+}
+
+.social-link {
+    color: white;
+    transition: color 0.2s;
+    display: inline-flex;
+    align-items: center;
+}
+
+.social-link:hover {
+    color: var(--secondary-color);
+}
+
+.social-icon {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+}
+
+.copyright {
+    font-size: 0.9em;
+    opacity: 0.8;
+    margin-top: 10px;
+}
