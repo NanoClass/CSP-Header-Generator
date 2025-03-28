@@ -353,9 +353,14 @@ input:checked + .slider:before {
 }
 
 .social-icon {
-    width: 24px;
-    height: 24px;
-    fill: currentColor;
+    width: 32px;
+    height: 32px;
+    fill: white;
+    transition: transform 0.2s;
+}
+
+.social-icon:hover {
+    transform: scale(1.1);
 }
 
 .copyright {

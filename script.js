@@ -30,8 +30,8 @@ const directiveExplanations = {
             {value: "'unsafe-inline'", description: "Allow inline scripts (dangerous for XSS)"},
             {value: "'unsafe-eval'", description: "Allow dynamic code evaluation (dangerous)"},
             {value: "'unsafe-hashes'", description: "Allow hashes to match inline event handlers (security risk)"},
-            {value: "nonce-", description: "Allow scripts with matching nonce<br><code><script nonce='abc123'>...</script></code>"},
-            {value: "sha256-", description: "Allow scripts matching hash<br><code><script integrity='sha256-abc123'>...</script></code>"}
+            {value: "nonce-", description: "Allow scripts with matching nonce<code>&lt;script nonce='abc123'&gt;...&lt;/script&gt;</code>"},
+            {value: "sha256-", description: "Allow scripts matching hash<code>&lt;script integrity='sha256-abc123'&gt;...&lt;/script&gt;</code>"}
         ]
     },
     'style-src': {
@@ -40,8 +40,8 @@ const directiveExplanations = {
             ...hostExpressions,
             {value: "'unsafe-inline'", description: "Allow inline <style> elements and style attributes (security risk)"},
             {value: "'unsafe-hashes'", description: "Allow hashes to match inline styles (security risk)"},
-            {value: "nonce-", description: "Allow styles with matching nonce<br><code><style nonce='def456'>...</style></code>"},
-            {value: "sha256-", description: "Allow styles matching hash<br><code><link href='styles.css' integrity='sha256-def456'></code>"}
+            {value: "nonce-", description: "Allow styles with matching nonce<code>&lt;style nonce='def456'&gt;...&lt;/style&gt;</code>"},
+            {value: "sha256-", description: "Allow styles matching hash<code>&lt;link href='styles.css' integrity='sha256-def456'&gt;</code>"}
             
         ]
     },
